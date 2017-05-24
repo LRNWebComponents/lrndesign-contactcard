@@ -1,6 +1,6 @@
 # \<lrndesign-contactcard\>
 
-A LRN element
+A LRN elements are awesome.
 
 ## Install the Polymer-CLI
 
