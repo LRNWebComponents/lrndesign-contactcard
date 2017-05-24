@@ -24,6 +24,7 @@ lrndesign-contactcard
 
       .name {
         text-align: center;
+        min-height: 1em;
       }
 
       #img_wrap {
@@ -37,9 +38,8 @@ lrndesign-contactcard
         padding: 4px;
         border-radius: 50%;
         width: 50%;
-        height: auto;
+        min-height: 10em;
         margin-top: 25px;
-        
       }
 
       .position {
@@ -119,30 +119,31 @@ lrndesign-contactcard
         margin: 0;
         min-width: 1rem;
       }
-
-     
-
-     
-
-     
-
-
     </style>
-    
 <paper-card>
     <div id="img_wrap"><img class="profile-image" src="[[image]]"></div>
-    <div class="name"><h2>[[name]]</h2></div>
+    <div class="name">
+      <template is="dom-if" if="{{name}}">
+      <h2>[[name]]</h2>
+      </template>
+    </div>
     <div class="position">[[position]]</div>
     <div class="organization">[[organization]]</div>
-<div id="group_icons">
-  <div class="icons">
-      <a href="mailto:cgl109@psu.edu"><paper-button id="mail"><iron-icon icon="mail" class="mail_icon"></iron-icon></paper-button></a>
-      <paper-tooltip for="mail">Email me!</paper-tooltip>
-      <a href="tel:+8148674604"><iron-icon icon="maps:local-phone" class="phone_icon"></iron-icon></a>
-      <a href="https://odl.science.psu.edu" target="_blank"><iron-icon icon="hardware:desktop-windows" class="computer_icon"></iron-icon>
-      <a href="https://www.elmsln.org" target="_blank"><lrn-icon icon="network" class="network_icon"></lrn-icon>
-  </div>
-</div>
+    <div id="group_icons">
+      <div class="icons">
+          <template is="dom-if" if="{{email}}">
+            <a href$="mailto:{{email}}">
+              <paper-button id="mail">
+                <iron-icon icon="mail" class="mail_icon"></iron-icon>
+              </paper-button>
+            </a>
+            <paper-tooltip for="mail">Email me!</paper-tooltip>
+          </template>
+          <a href="tel:+8148674604"><iron-icon icon="maps:local-phone" class="phone_icon"></iron-icon></a>
+          <a href="https://odl.science.psu.edu" target="_blank"><iron-icon icon="hardware:desktop-windows" class="computer_icon"></iron-icon>
+          <a href="https://www.elmsln.org" target="_blank"><lrn-icon icon="network" class="network_icon"></lrn-icon>
+      </div>
+    </div>
 </paper-card>
 
 </template>
@@ -151,29 +152,37 @@ lrndesign-contactcard
     Polymer({
 
       is: 'lrndesign-contactcard',
-
       properties: {
-        
+        /**
+         * A url to the image in question
+         */
         image: {
           type: String,
-          value: 'https://drupal.psu.edu/sites/default/files/styles/square-profile-portrait/public/20150618_134134_222.png?itok=NeZIn5Bi',
+          reflectToAttribute: true,
+          notify: true,
         },
-
-
+        /**
+         * The email address of the user.
+         */
+        email: {
+          type: String,
+          reflectToAttribute: true,
+          notify: true,
+        },
         name: {
           type: String,
-          value: 'Charles Lavera',
+          reflectToAttribute: true,
+          notify: true,
         },
-
-
          position: {
           type: String,
-          value: 'Multimedia Specialist',
+          reflectToAttribute: true,
+          notify: true,
         },
-
         organization: {
           type: String,
-          value: 'ODL | Penn State',
+          reflectToAttribute: true,
+          notify: true,
         },
 
       },
