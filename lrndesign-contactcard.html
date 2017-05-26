@@ -139,7 +139,18 @@ lrndesign-contactcard
             </a>
             <paper-tooltip for="mail">Email me!</paper-tooltip>
           </template>
-          <a href="tel:+8148674604"><iron-icon icon="maps:local-phone" class="phone_icon"></iron-icon></a>
+          <template is="dom-if" if="{{phone}}">
+            <a href="tel:{{phone}}">
+              <paper-button id="phone">
+                <iron-icon icon="maps:local-phone" class="phone_icon"></iron-icon>
+                </paper-button>
+            </a>
+            <paper-tooltip for="phone">Call me!</paper-tooltip>
+          </template>
+
+          
+
+         
           <a href="https://odl.science.psu.edu" target="_blank"><iron-icon icon="hardware:desktop-windows" class="computer_icon"></iron-icon>
           <a href="https://www.elmsln.org" target="_blank"><lrn-icon icon="network" class="network_icon"></lrn-icon>
       </div>
@@ -154,7 +165,7 @@ lrndesign-contactcard
       is: 'lrndesign-contactcard',
       properties: {
         /**
-         * A url to the image in question
+         * A url to the image in question.
          */
         image: {
           type: String,
@@ -169,20 +180,38 @@ lrndesign-contactcard
           reflectToAttribute: true,
           notify: true,
         },
+        /**
+         * The name of the user.
+         */
         name: {
           type: String,
           reflectToAttribute: true,
           notify: true,
         },
+        /**
+         * The job-title / position of the user.
+         */
          position: {
           type: String,
           reflectToAttribute: true,
           notify: true,
         },
+        /**
+         * The employer / organization of the user.
+         */
         organization: {
           type: String,
           reflectToAttribute: true,
           notify: true,
+        },
+        /**
+         * The phone number of the user.
+         */
+        phone: {
+          type: Boolean,
+          reflectToAttribute: true,
+          notify: true,
+          
         },
 
       },
