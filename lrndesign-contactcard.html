@@ -7,6 +7,7 @@
 <link rel="import" href="../iron-icons/maps-icons.html">
 <link rel="import" href="../iron-icons/hardware-icons.html">
 <link rel="import" href="../paper-tooltip/paper-tooltip.html">
+<link rel="import" href="../social-media-icons/social-media-icons.html">
 
 <!--
 `lrndesign-contactcard`
@@ -20,6 +21,8 @@ lrndesign-contactcard
     <style>
       :host {
         display: block;
+        --contactcard-icons-hover-color: gray;
+        --contactcard-icons-fill-color: #aeaeae;
       }
 
       .name {
@@ -58,45 +61,32 @@ lrndesign-contactcard
       .mail_icon {
         width: 35px;
         height: 35px;
-        color: #aeaeae;
+        color: var(--contactcard-icons-fill-color);
       }
-
+      
       .mail_icon:hover {
-        color: gray;
+        color: var(--contactcard-icons-hover-color);
       }
-
+    
       .phone_icon {
         width: 35px;
         height: 35px;
-        color: #aeaeae;
+        color: var(--contactcard-icons-fill-color);
       }
 
       .phone_icon:hover {
-        color: gray;
+        color: var(--contactcard-icons-hover-color);
       }
 
       .computer_icon {
         width: 35px;
         height: 35px;
-        color: #aeaeae;
+        color: var(--contactcard-icons-fill-color);
       }
 
       .computer_icon:hover {
-        color: gray;
+        color: var(--contactcard-icons-hover-color);
       }
-
-      .network_icon {
-        width: 35px;
-        height: 35px;
-        color: #aeaeae;
-        padding-left: 5px;
-      }
-
-      .network_icon:hover {
-        color: gray;
-      }
-
-    
 
       #group_icons {
         width: 70%;
@@ -105,6 +95,11 @@ lrndesign-contactcard
         margin-bottom: 10px;
         border-top: 2px #aeaeae solid;
         padding-top: 5px;
+      }
+
+      social-media-icons {
+        --social-media-icons-hover-color: var(--contactcard-icons-hover-color);
+        margin-left: .5em;
       }
 
       .icons {
@@ -137,15 +132,35 @@ lrndesign-contactcard
                 <iron-icon icon="mail" class="mail_icon"></iron-icon>
               </paper-button>
             </a>
-            <paper-tooltip for="mail">Email me!</paper-tooltip>
+            <paper-tooltip for="mail">Email</paper-tooltip>
           </template>
-          <a href="tel:+8148674604"><iron-icon icon="maps:local-phone" class="phone_icon"></iron-icon></a>
-          <a href="https://odl.science.psu.edu" target="_blank"><iron-icon icon="hardware:desktop-windows" class="computer_icon"></iron-icon>
-          <a href="https://www.elmsln.org" target="_blank"><lrn-icon icon="network" class="network_icon"></lrn-icon>
+          <template is="dom-if" if="{{phone}}">
+            <a href="tel:{{phone}}">
+              <paper-button id="phone">
+                <iron-icon icon="maps:local-phone" class="phone_icon"></iron-icon>
+                </paper-button>
+            </a>
+            <paper-tooltip for="phone">Call</paper-tooltip>
+          </template>
+          <template is="dom-if" if="{{website}}">
+            <a href="{{website}}"> 
+              <paper-button id="website">
+                <iron-icon icon="hardware:desktop-windows" class="computer_icon"></iron-icon>
+                </paper-button>
+            </a>
+            <paper-tooltip for="website">Visit</paper-tooltip>
+          </template>
+          <template is="dom-if" if="{{twitter}}">
+            <a href="{{}}"> 
+              <paper-button id="twitter">
+                <social-media-icons icon="twitter" color="#aeaeae" size="35" class="twitter_icon"></social-media-icons>
+                </paper-button>
+            </a>
+            <paper-tooltip for="twitter">Connect</paper-tooltip>
+          </template>
       </div>
     </div>
 </paper-card>
-
 </template>
 
   <script>
@@ -154,7 +169,7 @@ lrndesign-contactcard
       is: 'lrndesign-contactcard',
       properties: {
         /**
-         * A url to the image in question
+         * A url to the image in question.
          */
         image: {
           type: String,
@@ -169,22 +184,54 @@ lrndesign-contactcard
           reflectToAttribute: true,
           notify: true,
         },
+        /**
+         * The name of the user.
+         */
         name: {
           type: String,
           reflectToAttribute: true,
           notify: true,
         },
+        /**
+         * The job-title / position of the user.
+         */
          position: {
           type: String,
           reflectToAttribute: true,
           notify: true,
         },
+        /**
+         * The employer / organization of the user.
+         */
         organization: {
           type: String,
           reflectToAttribute: true,
           notify: true,
         },
-
+        /**
+         * The phone number of the user.
+         */
+        phone: {
+          type: String,
+          reflectToAttribute: true,
+          notify: true,
+        },
+        /**
+         * The associated website of the user.
+         */
+         website: {
+          type: String,
+          reflectToAttribute: true,
+          notify: true,
+        },
+        /**
+         * Twitter account of the user.
+         */
+         twitter: {
+          type: String,
+          reflectToAttribute: true,
+          notify: true,
+        },   
       },
 });
   </script>
